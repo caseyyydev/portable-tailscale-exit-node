@@ -63,4 +63,3 @@ printf '\nConfiguration written safely. Next run:\n'
 printf '  docker compose up -d --build\n'
 printf '  ./scripts/status.sh\n\n'
 printf 'Then approve this device as an exit node in the Tailscale admin console.\n'
-

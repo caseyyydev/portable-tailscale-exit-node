@@ -40,4 +40,3 @@ services:
 secrets:
   tailscale_authkey:
     file: ./secrets/tailscale-authkey
-

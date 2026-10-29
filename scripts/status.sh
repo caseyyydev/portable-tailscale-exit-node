@@ -31,4 +31,3 @@ else
 fi
 
 printf '\nNote: local status cannot confirm admin-console exit-node approval.\n'
-

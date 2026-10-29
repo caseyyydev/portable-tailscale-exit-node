@@ -85,4 +85,3 @@ if [[ "$START" == true ]]; then
 else
   printf 'Inspect the configuration, then start with: docker compose up -d\n'
 fi
-

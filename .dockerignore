@@ -6,4 +6,3 @@ tailscale-state
 backups
 *.tar.gz
 *.sha256
-

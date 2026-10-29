@@ -143,4 +143,3 @@ secret or state file should ever be committed to this repository.
 ## License
 
 MIT
-

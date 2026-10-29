@@ -29,4 +29,3 @@ allow inbound UDP 41641 when practical for better direct connectivity.
 
 Open a GitHub security advisory for sensitive reports. Do not include auth keys,
 state archives, public IPs, or other live credentials in a public issue.
-

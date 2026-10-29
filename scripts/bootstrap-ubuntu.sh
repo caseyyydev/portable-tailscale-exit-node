@@ -63,4 +63,3 @@ if [[ "$TARGET_USER" != root ]]; then
   printf 'Log out and back in once so the docker group membership takes effect.\n'
 fi
 printf 'This script did not change SSH, UFW, or your provider firewall.\n'
-

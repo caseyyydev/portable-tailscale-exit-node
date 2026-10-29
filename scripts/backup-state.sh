@@ -74,4 +74,3 @@ chmod 600 "$OUTPUT.sha256"
 printf 'Backup: %s\nChecksum: %s\n' "$OUTPUT" "$OUTPUT.sha256"
 printf 'This archive contains private node identity material. Encrypt it before off-host storage.\n'
 printf 'The auth-key secret was not included. The container remains stopped.\n'
-
