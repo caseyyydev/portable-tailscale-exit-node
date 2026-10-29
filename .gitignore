@@ -1,0 +1,10 @@
+.env
+secrets/*
+!secrets/.gitkeep
+tailscale-state/*
+!tailscale-state/.gitkeep
+backups/
+*.tar.gz
+*.sha256
+.DS_Store
+

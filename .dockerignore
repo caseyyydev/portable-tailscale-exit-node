@@ -1,0 +1,9 @@
+.git
+.github
+.env
+secrets
+tailscale-state
+backups
+*.tar.gz
+*.sha256
+

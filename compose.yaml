@@ -1,0 +1,43 @@
+name: portable-tailscale-exit-node
+
+services:
+  tailscale:
+    build:
+      context: .
+      args:
+        TAILSCALE_VERSION: ${TAILSCALE_VERSION:-1.94.1}
+    image: ${IMAGE_NAME:-portable-tailscale-exit-node}:${TAILSCALE_VERSION:-1.94.1}
+    hostname: ${TS_HOSTNAME:-portable-exit-node}
+    environment:
+      TS_AUTHKEY: file:/run/secrets/tailscale_authkey
+      TS_AUTH_ONCE: "true"
+      TS_STATE_DIR: /var/lib/tailscale
+      TS_USERSPACE: "false"
+      TS_EXTRA_ARGS: --advertise-exit-node
+      TS_ENABLE_HEALTH_CHECK: "true"
+      TS_LOCAL_ADDR_PORT: 127.0.0.1:9002
+    secrets:
+      - tailscale_authkey
+    volumes:
+      - ./tailscale-state:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      net.ipv4.ip_forward: "1"
+      net.ipv6.conf.all.forwarding: "1"
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    stop_grace_period: 30s
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+secrets:
+  tailscale_authkey:
+    file: ./secrets/tailscale-authkey
+
