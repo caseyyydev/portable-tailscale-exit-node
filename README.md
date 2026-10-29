@@ -27,19 +27,24 @@ For best direct connectivity, allow inbound UDP 41641 in the provider firewall.
 Tailscale can fall back to DERP relays when it is blocked, but performance may be
 lower. Keep SSH restricted; this project does not modify firewall rules for you.
 
-## Quick start on Ubuntu
+## One-command setup on a new Ubuntu VPS
 
 ```bash
 git clone https://github.com/caseyyydev/portable-tailscale-exit-node.git
 cd portable-tailscale-exit-node
-./scripts/bootstrap-ubuntu.sh
+./scripts/install.sh
 ```
 
-Log out and back in if the bootstrap script added you to the `docker` group,
-then configure the node. The auth-key prompt is hidden so the key does not enter
-shell history or process listings.
+The installer performs the Ubuntu bootstrap, prompts for a hostname and Tailscale
+auth key, builds the pinned image, and starts the exit node. The auth-key prompt
+is hidden so the key does not enter shell history or process listings. If Docker
+group access is not active in the current SSH session, the installer safely uses
+`sudo`; reconnect once afterward for normal unprivileged Docker commands.
+
+To run the individual stages instead:
 
 ```bash
+./scripts/bootstrap-ubuntu.sh
 ./scripts/configure.sh
 docker compose up -d --build
 ./scripts/status.sh
@@ -64,8 +69,7 @@ printer, while the exit node is enabled.
 docker compose logs -f --tail=200 tailscale
 
 # Update after deliberately changing TAILSCALE_VERSION
-docker compose build --pull
-docker compose up -d
+./scripts/update.sh
 
 # Stop without deleting identity
 docker compose stop

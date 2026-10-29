@@ -57,7 +57,15 @@ unset AUTH_KEY
 chmod 600 "$ENV_FILE"
 
 cd "$ROOT_DIR"
-docker compose config --quiet
+if docker info >/dev/null 2>&1; then
+  DOCKER=(docker)
+elif command -v sudo >/dev/null 2>&1 && sudo docker info >/dev/null 2>&1; then
+  DOCKER=(sudo docker)
+else
+  printf 'Docker is unavailable. Run ./scripts/bootstrap-ubuntu.sh first.\n' >&2
+  exit 1
+fi
+"${DOCKER[@]}" compose config --quiet
 
 printf '\nConfiguration written safely. Next run:\n'
 printf '  docker compose up -d --build\n'
